@@ -1,21 +1,24 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { add_To_Cart } from '../Store/Reducer'
+import { connect, useDispatch } from 'react-redux'
+import { add_To_Cart, put } from '../Store/Reducer'
+import axios from 'axios';
 
 
 function Products(props) {
      let data = props.CategoriesReducer.active.data
+     const dispatch = useDispatch()
+
   return (
     <div className='cards'>
           <h2>Category : {props.CategoriesReducer.active.name}</h2>
             <div className="all-cards">   
           {
-               data.map((ele,i) => 
+               data?.map((ele,i) => 
                <div key={i} className='card'>
                     <h3>{ele.name}</h3>
-                    <p>{ele.description}</p>
-                    <p>{ele.price}</p>
-                    <button onClick={() => props.add_To_Cart(ele)}>Add To Cart</button>     
+                    <p>in Stock : {ele.inStock}</p>
+                    <p>Price : {ele.price}</p>
+                         <button onClick={() => { props.add_To_Cart(ele , 'in'); dispatch(put(ele , 'in')); }}>Add To Cart</button>     
                </div>)
           }
             </div>
