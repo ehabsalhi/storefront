@@ -1,10 +1,15 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { activate } from '../Store/Reducer';
+import React, { useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { activate, get } from '../Store/Reducer';
 import Products from './Products';
 import Cart from './Cart';
 
 function Category(props) {
+     let dispatch = useDispatch()
+     
+     useEffect(() => {
+          dispatch(get());
+     } ,[])
       
      return (
           <div className='mid-page'>
@@ -14,7 +19,8 @@ function Category(props) {
                     <div className="categories">
                     {
                     props.CategoriesReducer.categories.map((ele , i) =>{
-                         return <p  onClick={() => props.activate(ele)} key={i}>{ele}</p>
+                         return <p onClick={() => {  props.activate(ele); }} key={i}>{ele}</p>
+                         // return <p  onClick={() => props.activate(ele)} key={i}>{ele}</p>
                     })
                     }
                     </div>
