@@ -8,10 +8,10 @@ import Footer from './Component/Footer'
 
 export default function Main() {
   return (
-    <Provider store={Store}>
-      <Header/>
+    // <Provider store={Store}>
+    <>
       <Category />
-      <Footer/>
-    </Provider>
+    </>
+    // </Provider>
   )
 }
